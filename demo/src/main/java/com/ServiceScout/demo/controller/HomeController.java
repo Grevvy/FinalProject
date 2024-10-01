@@ -11,7 +11,7 @@ public class HomeController {
     // Show login page as the first page
     @GetMapping("/")
     public String loginPage() {
-        return "login";  // Serve the login.html page
+        return "login.html";  // Explicitly serve login.html from the static folder
     }
 
     // Handle login form submission
@@ -21,13 +21,13 @@ public class HomeController {
         if ("admin".equals(username) && "password".equals(password)) {
             return "redirect:/home";  // Redirect to the home page on successful login
         } else {
-            return "redirect:/?error";  // Redirect back to login with error
+            return "redirect:/?error=true";  // Redirect back to login with error
         }
     }
 
     // Show the homepage after successful login
     @GetMapping("/home")
     public String homepage() {
-        return "home";  // Serve the home.html page after login
+        return "home.html";  // Explicitly serve home.html from the static folder
     }
 }
