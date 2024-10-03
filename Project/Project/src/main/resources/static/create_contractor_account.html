@@ -3,54 +3,181 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Contractor Account</title>
+    <title>Create Contractor Account - Service Scout</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
-            padding: 20px;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
+
+        .account-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
         form {
-            display: inline-block;
+            display: flex;
+            flex-direction: column;
         }
-        label, input {
-            display: block;
-            margin-bottom: 10px;
+
+        label {
+            text-align: left;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="tel"],
+        input[type="password"] {
+            padding: 10px;
+            font-size: 14px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            padding: 10px;
+            font-size: 16px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #218838;
+        }
+
+        .services-container {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .error-message {
+            color: red;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .back-link {
+            margin-top: 15px;
+        }
+
+        .back-link a {
+            text-decoration: none;
+            color: #007BFF;
+            transition: color 0.3s ease;
+        }
+
+        .back-link a:hover {
+            color: #0056b3;
+        }
+
+        /* Responsive for smaller devices */
+        @media (max-width: 768px) {
+            .account-container {
+                width: 90%;
+            }
         }
     </style>
 </head>
 <body>
-<h2>Create Contractor Account</h2>
-<form action="/perform_contractor_creation" method="post">
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name" required>
 
-    <label for="businessName">Business Name:</label>
-    <input type="text" id="businessName" name="businessName" required>
+<div class="account-container">
+    <h2>Create Contractor Account</h2>
 
-    <label for="phone">Phone Number:</label>
-    <input type="tel" id="phone" name="phone" required>
+    <!-- Error message for password mismatch (hidden by default) -->
+    <div id="error-message" class="error-message">Passwords do not match. Please try again.</div>
 
-    <label>Services:</label>
-    <input type="checkbox" id="electrician" name="services" value="Electrician">
-    <label for="electrician">Electrician</label>
+    <form id="contractorForm" action="/perform_contractor_creation" method="post" onsubmit="return validatePasswords()">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
 
-    <input type="checkbox" id="plumber" name="services" value="Plumber">
-    <label for="plumber">Plumber</label>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
 
-    <input type="checkbox" id="carpenter" name="services" value="Carpenter">
-    <label for="carpenter">Carpenter</label>
+        <label for="confirmPassword">Confirm Password:</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" required>
 
-    <input type="checkbox" id="hvac" name="services" value="HVAC">
-    <label for="hvac">HVAC</label>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
 
-    <!-- Add more services as needed -->
+        <label for="businessName">Business Name:</label>
+        <input type="text" id="businessName" name="businessName" required>
 
-    <label for="address">Address:</label>
-    <input type="text" id="address" name="address" required>
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" required>
 
-    <input type="submit" value="Create Account">
-</form>
+        <label>Services:</label>
+        <div class="services-container">
+            <input type="checkbox" id="electrician" name="services" value="Electrician">
+            <label for="electrician">Electrician</label>
+
+            <input type="checkbox" id="plumber" name="services" value="Plumber">
+            <label for="plumber">Plumber</label>
+
+            <input type="checkbox" id="carpenter" name="services" value="Carpenter">
+            <label for="carpenter">Carpenter</label>
+
+            <input type="checkbox" id="hvac" name="services" value="HVAC">
+            <label for="hvac">HVAC</label>
+
+            <input type="checkbox" id="painter" name="services" value="Painter">
+            <label for="painter">Painter</label>
+
+            <input type="checkbox" id="roofer" name="services" value="Roofer">
+            <label for="roofer">Roofer</label>
+        </div>
+
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" required>
+
+        <input type="submit" value="Create Account">
+    </form>
+
+    <!-- Back link -->
+    <div class="back-link">
+        <a href="/">Back to Login</a>
+    </div>
+</div>
+
+<script>
+    function validatePasswords() {
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+        const errorMessage = document.getElementById('error-message');
+
+        if (password !== confirmPassword) {
+            errorMessage.style.display = 'block';
+            return false; // Prevent form submission
+        }
+
+        errorMessage.style.display = 'none'; // Hide error message
+        return true; // Allow form submission
+    }
+</script>
+
 </body>
 </html>
 

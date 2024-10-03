@@ -2,25 +2,120 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contractor Profile - Service Scout</title>
+  <title>Contractor Profile</title>
   <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            padding: 20px;
-        }
-    </style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f9f9f9;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+    }
+    h2 {
+        margin-bottom: 20px;
+    }
+    .profile-details, .review, .review-form {
+        border: 1px solid #ccc;
+        padding: 15px;
+        margin-bottom: 20px;
+        background-color: #fff;
+        width: 100%;
+        max-width: 600px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .review {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+    }
+    .review-actions {
+        margin-top: 10px;
+    }
+    .edit-button, .logout-button {
+        padding: 10px;
+        margin-top: 15px;
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    .edit-button:hover, .logout-button:hover {
+        background-color: #0056b3;
+    }
+  </style>
 </head>
 <body>
 <h2>Contractor Profile</h2>
 
-<p>Name: John Doe</p>
-<p>Services: Plumber, Electrician</p>
-<p>Phone: 123-456-7890</p>
+<div class="profile-details">
+  <h3>Business Information</h3>
+  <p><strong>Name:</strong> <span id="businessName">Contractor's Business Name</span></p>
+  <p><strong>Address:</strong> <span id="businessAddress">123 Contractor Lane</span></p>
+  <p><strong>Phone Number:</strong> <span id="businessPhone">555-1234</span></p>
+  <p><strong>Services Provided:</strong> <span id="servicesProvided">Electrician, Plumber</span></p>
+  <button class="edit-button" onclick="location.href='/edit_contractor_profile'">Edit Profile</button>
+  <button class="requests-button" onclick="location.href='/view_requests'">View Requests</button>
+</div>
 
-<p><a href="/edit_profile">Edit Profile</a></p>
-<p><a href="/home">Back to Home</a></p>
 
+<h3>Reviews</h3>
+
+<div id="reviews">
+  <div class="review">
+    <p><strong>Customer Name:</strong> John Doe</p>
+    <p><strong>Review:</strong> Great service!</p>
+    <p><strong>Rating:</strong> ★★★★☆</p>
+    <div class="review-actions">
+      <button onclick="replyToReview('John Doe')">Reply</button>
+      <button onclick="flagReview('1')">Flag as Inappropriate</button>
+    </div>
+  </div>
+  <!-- More reviews will be dynamically added here -->
+</div>
+
+<h3>Leave a Review</h3>
+<div class="review-form">
+  <form action="/perform_review" method="post">
+    <label for="reviewText">Your Review:</label>
+    <textarea id="reviewText" name="reviewText" required></textarea>
+
+    <label for="rating">Rating:</label>
+    <select id="rating" name="rating" required>
+      <option value="1">1 Star</option>
+      <option value="2">2 Stars</option>
+      <option value="3">3 Stars</option>
+      <option value="4">4 Stars</option>
+      <option value="5">5 Stars</option>
+    </select>
+
+    <input type="submit" value="Submit Review">
+  </form>
+</div>
+
+<button class="logout-button" onclick="location.href='/logout'">Logout</button>
+
+<script>
+  function replyToReview(customerName) {
+      const reply = prompt(`Reply to ${customerName}'s review:`);
+      if (reply) {
+          // Call backend to save reply (implement this)
+          alert(`Your reply to ${customerName}: "${reply}" has been submitted.`);
+      }
+  }
+
+  function flagReview(reviewId) {
+      if (confirm(`Are you sure you want to flag this review as inappropriate?`)) {
+          // Call backend to flag review (implement this)
+          alert(`The review has been flagged.`);
+      }
+  }
+</script>
 </body>
 </html>

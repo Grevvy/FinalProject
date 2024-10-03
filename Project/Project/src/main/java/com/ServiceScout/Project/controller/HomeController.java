@@ -1,7 +1,9 @@
 package com.ServiceScout.Project.controller;
 
 
+import ch.qos.logback.core.model.Model;
 import jakarta.servlet.http.*;
+import org.apache.catalina.connector.Request;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,7 +35,7 @@ public class HomeController {
 
         if ("admin".equals(username) && "password".equals(password)) {
             session.setAttribute("userType", "admin");
-            return "redirect:/home";
+            return "redirect:/admin";
         } else if ("contractor".equals(username) && "password".equals(password)) {
             session.setAttribute("userType", "contractor");
             return "redirect:/home";
@@ -49,6 +51,11 @@ public class HomeController {
     @GetMapping("/home")
     public String homepage() {
         return "home.html";  // Serve home.html from static folder
+    }
+
+    @GetMapping("/admin")
+    public String adminDashboard() {
+        return "admin_dashboard.html";  // Make sure this corresponds to admin_dashboard.html
     }
 
     // Serve the create contractor account page
@@ -140,4 +147,20 @@ public class HomeController {
         return "redirect:/home";  // Redirect back to home (update with results in the future)
     }
 
+    @GetMapping("/edit_contractor_profile")
+    public String editContractorProfilePage(HttpSession session) {
+        // Add logic to check if the user is logged in and is a contractor
+        return "redirect:/edit_contractor_profile.html";  // Serve the edit contractor profile page
+    }
+
+    @GetMapping("/view_requests")
+    public String viewRequests(HttpSession session) {
+        // Add logic to check if the user is logged in and is a contractor
+        if (!"contractor".equals(session.getAttribute("userType"))) {
+            return "redirect:/";  // Redirect to login if not a contractor
+        }
+        return "view_requests.html"; // Serve view_requests.html
+    }
+
 }
+
