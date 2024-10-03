@@ -5,15 +5,180 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Home - Service Scout</title>
   <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            padding: 20px;
-        }
-    </style>
+      /* General styling for the page */
+      body {
+          font-family: Arial, sans-serif;
+          background-color: #f4f4f4;
+          margin: 0;
+          padding: 20px;
+      }
+
+      h2 {
+          text-align: center;
+          color: #333;
+          margin-bottom: 40px;
+      }
+
+      /* Styling for the search container */
+      .search-container {
+          margin-bottom: 30px;
+          text-align: center;
+      }
+
+      .search-container input[type="text"] {
+          padding: 10px;
+          width: 250px;
+          font-size: 16px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          margin-right: 10px;
+      }
+
+      .search-container button {
+          padding: 10px 15px;
+          font-size: 16px;
+          background-color: #007BFF;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+      }
+
+      .search-container button:hover {
+          background-color: #0056b3;
+      }
+
+      /* Flex container for the contractor cards */
+      .container {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 20px;
+      }
+
+      /* Styling for each contractor card */
+      .contractor-card {
+          background-color: white;
+          border: 1px solid #ccc;
+          border-radius: 8px;
+          padding: 20px;
+          width: 300px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .contractor-card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      }
+
+      .contractor-name {
+          font-size: 1.5em;
+          color: #333;
+          margin-bottom: 10px;
+      }
+
+      .contractor-services, .contractor-phone {
+          margin-bottom: 15px;
+          color: #555;
+      }
+
+      .contractor-card button {
+          padding: 10px 20px;
+          font-size: 14px;
+          background-color: #28a745;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+      }
+
+      .contractor-card button:hover {
+          background-color: #218838;
+      }
+
+      /* Styling for navigation links */
+      nav {
+          margin-top: 30px;
+          text-align: center;
+      }
+
+      nav a {
+          text-decoration: none;
+          color: #007BFF;
+          font-size: 16px;
+          margin: 0 15px;
+          transition: color 0.3s ease;
+      }
+
+      nav a:hover {
+          color: #0056b3;
+      }
+
+      /* Mobile responsiveness */
+      @media (max-width: 768px) {
+          .contractor-card {
+              width: 100%;
+              margin-bottom: 20px;
+          }
+
+          .search-container input[type="text"] {
+              width: 100%;
+              margin-bottom: 10px;
+          }
+
+          .search-container button {
+              width: 100%;
+          }
+      }
+  </style>
 </head>
 <body>
-<h2>Welcome to Service Scout Home Page!</h2>
-<p>You have successfully logged in.</p>
+
+<h2>Welcome to Service Scout!</h2>
+
+<!-- Search Bar -->
+<div class="search-container">
+  <form action="/search_services" method="get">
+    <input type="text" id="search" name="query" placeholder="Enter service (e.g., plumber, electrician)" required>
+    <button type="submit">Search</button>
+  </form>
+</div>
+
+<!-- Contractor Cards Container -->
+<div class="container">
+  <!-- Contractor Card 1 -->
+  <div class="contractor-card">
+    <div class="contractor-name">John Doe</div>
+    <div class="contractor-services">Services: Electrician, Plumber</div>
+    <div class="contractor-phone">Phone: 123-456-7890</div>
+    <button>Request Service</button>
+  </div>
+
+  <!-- Contractor Card 2 -->
+  <div class="contractor-card">
+    <div class="contractor-name">Jane Smith</div>
+    <div class="contractor-services">Services: Carpenter, HVAC</div>
+    <div class="contractor-phone">Phone: 987-654-3210</div>
+    <button>Request Service</button>
+  </div>
+
+  <!-- Contractor Card 3 -->
+  <div class="contractor-card">
+    <div class="contractor-name">Bob Johnson</div>
+    <div class="contractor-services">Services: Painter, Roofer</div>
+    <div class="contractor-phone">Phone: 555-555-5555</div>
+    <button>Request Service</button>
+  </div>
+</div>
+
+<!-- Navigation Links -->
+<nav>
+  <a href="/view_profile">View Your Profile</a>
+  <a href="/logout">Logout</a>
+</nav>
+
 </body>
 </html>
