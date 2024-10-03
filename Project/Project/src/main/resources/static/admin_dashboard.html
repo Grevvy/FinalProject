@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Service Scout</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 20px;
+    }
+
+    .dashboard-container {
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 80%;
+        max-width: 800px;
+        margin: auto;
+    }
+
+    h2 {
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .section {
+        margin-bottom: 30px;
+    }
+
+    .flagged-item {
+        background-color: #ffe6e6;
+        padding: 10px;
+        border: 1px solid #ffcccc;
+        margin-bottom: 10px;
+    }
+
+    .back-link {
+        margin-top: 20px;
+    }
+
+    .back-link a {
+        text-decoration: none;
+        color: #007BFF;
+    }
+
+    .back-link a:hover {
+        color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+<div class="dashboard-container">
+  <h2>Admin Dashboard</h2>
+
+  <div class="section">
+    <h3>Flagged Reviews</h3>
+    <!-- Mock Data: Replace with actual flagged reviews data -->
+    <div class="flagged-item">Review ID: 12345 - "This service was terrible!"</div>
+    <div class="flagged-item">Review ID: 67890 - "I wouldn't recommend this contractor."</div>
+    <!-- Add more flagged reviews as needed -->
+  </div>
+
+  <div class="section">
+    <h3>Flagged Accounts</h3>
+    <!-- Mock Data: Replace with actual flagged accounts data -->
+    <div class="flagged-item">Account ID: 54321 - Username: flaggedUser1</div>
+    <div class="flagged-item">Account ID: 98765 - Username: suspiciousContractor</div>
+    <!-- Add more flagged accounts as needed -->
+  </div>
+
+  <div class="back-link">
+    <a href="/">Back to Login</a>
+  </div>
+</div>
+
+</body>
+</html>

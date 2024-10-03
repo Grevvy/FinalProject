@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>View Requests - Contractor</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 20px;
+    }
+    .request-section, .completed-jobs, .in-progress-jobs {
+        border: 1px solid #ccc;
+        padding: 15px;
+        margin-bottom: 20px;
+        background-color: #fff;
+    }
+    h2 {
+        color: #333;
+    }
+    .request {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+    .job-actions {
+        margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Customer Requests</h2>
+
+<div class="request-section">
+  <h3>Pending Requests</h3>
+  <div class="request">
+    <p><strong>Customer Name:</strong> Jane Smith</p>
+    <p><strong>Service Requested:</strong> Plumbing</p>
+    <div class="job-actions">
+      <button onclick="acceptRequest('1')">Accept</button>
+      <button onclick="denyRequest('1')">Deny</button>
+    </div>
+  </div>
+  <!-- More requests will be dynamically added here -->
+</div>
+
+<div class="completed-jobs">
+  <h3>Completed Jobs</h3>
+  <p><strong>Job 1:</strong> Fixed sink for John Doe</p>
+  <p><strong>Date:</strong> 9-15-2024</p>
+  <!-- More completed jobs will be dynamically added here -->
+</div>
+
+<div class="in-progress-jobs">
+  <h3>In Progress Jobs</h3>
+  <p><strong>Job 1:</strong> Electrical installation for Mike Brown</p>
+  <p><strong>Date:</strong> 9-20-2024</p>
+  <!-- More in-progress jobs will be dynamically added here -->
+</div>
+
+<script>
+  function acceptRequest(requestId) {
+      // Implement backend call to accept the request
+      alert(`Request ${requestId} accepted.`);
+  }
+
+  function denyRequest(requestId) {
+      // Implement backend call to deny the request
+      alert(`Request ${requestId} denied.`);
+  }
+</script>
+
+</body>
+</html>
