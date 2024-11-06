@@ -1,6 +1,8 @@
 package com.ServiceScout.Project.User;
 
+import com.ServiceScout.Project.Specialty.Specialty;
 import jakarta.persistence.*;
+import java.util.List;
 
 import java.sql.Date;
 
@@ -21,6 +23,28 @@ public class User {
 
     private String email;
 
+    @Column(nullable = false)
+    private String role;
+
+    private String address;
+
+    private String accountStatus;
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_specialty",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "specialty_id")
+    )
+    private List<Specialty> specialties;
+
+    public List<Specialty> getSpecialties() {
+        return specialties;
+    }
+
+    public void setSpecialties(List<Specialty> specialties) {
+        this.specialties = specialties;
+    }
 
     public long getUserId() {
         return userId;
@@ -85,12 +109,6 @@ public class User {
     public void setAccountStatus(String accountStatus) {
         this.accountStatus = accountStatus;
     }
-
-    private String address;
-
-    private String role;
-
-    private String accountStatus;
 
     public User() {
     }

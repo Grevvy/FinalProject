@@ -2,26 +2,58 @@ package com.ServiceScout.Project.Request;
 
 import com.ServiceScout.Project.User.User;
 import jakarta.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "request")
 public class Request {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long requestId;
 
+    // User who created the request
     @ManyToOne
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    // Contractor assigned to fulfill the request
+    @ManyToOne
+    @JoinColumn(name = "contractor_id")
+    private User contractor;
+
+    @Column(nullable = false)
     private String description;
 
-    public long getRequestId() {
-        return requestId;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Status status = Status.PENDING;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "created_at", updatable = false)
+    private Date createdAt = new Date();
+
+    public enum Status {
+        PENDING,
+        ACCEPTED,
+        COMPLETED
     }
 
-    public void setRequestId(long requestId) {
-        this.requestId = requestId;
+    // Constructors
+    public Request() {
+    }
+
+    public Request(User user, User contractor, String description, Status status) {
+        this.user = user;
+        this.contractor = contractor;
+        this.description = description;
+        this.status = status;
+        this.createdAt = new Date();
+    }
+
+    // Getters and Setters
+    public long getRequestId() {
+        return requestId;
     }
 
     public User getUser() {
@@ -32,6 +64,14 @@ public class Request {
         this.user = user;
     }
 
+    public User getContractor() {
+        return contractor;
+    }
+
+    public void setContractor(User contractor) {
+        this.contractor = contractor;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -40,12 +80,15 @@ public class Request {
         this.description = description;
     }
 
-    public Request(long requestId, User user, String description) {
-        this.requestId = requestId;
-        this.user = user;
-        this.description = description;
+    public Status getStatus() {
+        return status;
     }
 
-    public Request (){
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
     }
 }
