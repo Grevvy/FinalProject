@@ -1,4 +1,4 @@
-package com.ServiceScout.Project.controller;
+package com.ServiceScout.Project.User;
 
 
 import ch.qos.logback.core.model.Model;
