@@ -19,7 +19,7 @@ public class Request {
 
     // Contractor assigned to fulfill the request
     @ManyToOne
-    @JoinColumn(name = "contractor_id")
+    @JoinColumn(name = "contractor_id", nullable = true)
     private User contractor;
 
     @Column(nullable = false)

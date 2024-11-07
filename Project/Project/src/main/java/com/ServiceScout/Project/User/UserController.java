@@ -13,6 +13,11 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @PutMapping("/{userId}/specialties")
+    public User assignSpecialtiesToUser(@PathVariable long userId, @RequestBody List<Long> specialtyIds) {
+        return userService.assignSpecialtiesToUser(userId, specialtyIds);
+    }
+
     // Get all users
     @GetMapping
     public List<User> getAllUsers() {

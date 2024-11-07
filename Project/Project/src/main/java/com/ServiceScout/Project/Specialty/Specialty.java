@@ -1,7 +1,10 @@
 package com.ServiceScout.Project.Specialty;
 
 import com.ServiceScout.Project.User.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -15,7 +18,8 @@ public class Specialty {
     private String name;
 
     @ManyToMany(mappedBy = "specialties")
-    private Set<User> users;
+    @JsonBackReference
+    private List<User> users;
 
     // Constructors, Getters, and Setters
     public Specialty() {}
@@ -40,11 +44,11 @@ public class Specialty {
         this.name = name;
     }
 
-    public Set<User> getUsers() {
+    public List<User> getUsers() {
         return users;
     }
 
-    public void setUsers(Set<User> users) {
+    public void setUsers(List<User> users) {
         this.users = users;
     }
 }

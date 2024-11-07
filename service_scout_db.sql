@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 06, 2024 at 11:10 PM
+-- Generation Time: Nov 07, 2024 at 04:22 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -29,12 +29,30 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `request` (
   `requestId` bigint(20) NOT NULL,
-  `user_id` bigint(20) NOT NULL,
+  `user_id` bigint(20) DEFAULT NULL,
   `contractor_id` bigint(20) DEFAULT NULL,
-  `description` text NOT NULL,
-  `status` enum('PENDING','ACCEPTED','COMPLETED') DEFAULT 'PENDING',
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `description` varchar(255) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `status` varchar(50) NOT NULL,
+  `request_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `request_seq`
+--
+
+CREATE TABLE `request_seq` (
+  `next_val` bigint(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `request_seq`
+--
+
+INSERT INTO `request_seq` (`next_val`) VALUES
+(1);
 
 -- --------------------------------------------------------
 
@@ -44,12 +62,31 @@ CREATE TABLE `request` (
 
 CREATE TABLE `review` (
   `reviewId` bigint(20) NOT NULL,
-  `reviewer_id` bigint(20) NOT NULL,
-  `contractor_id` bigint(20) NOT NULL,
+  `reviewer_id` bigint(20) DEFAULT NULL,
+  `contractor_id` bigint(20) DEFAULT NULL,
   `textBody` text NOT NULL,
-  `rating` int(11) DEFAULT NULL CHECK (`rating` between 1 and 5),
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `rating` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `review_id` bigint(20) NOT NULL,
+  `text_body` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `review_seq`
+--
+
+CREATE TABLE `review_seq` (
+  `next_val` bigint(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `review_seq`
+--
+
+INSERT INTO `review_seq` (`next_val`) VALUES
+(1);
 
 -- --------------------------------------------------------
 
@@ -59,8 +96,26 @@ CREATE TABLE `review` (
 
 CREATE TABLE `specialty` (
   `specialtyId` bigint(20) NOT NULL,
-  `name` varchar(255) NOT NULL
+  `name` varchar(255) DEFAULT NULL,
+  `specialty_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `specialty_seq`
+--
+
+CREATE TABLE `specialty_seq` (
+  `next_val` bigint(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `specialty_seq`
+--
+
+INSERT INTO `specialty_seq` (`next_val`) VALUES
+(1);
 
 -- --------------------------------------------------------
 
@@ -70,14 +125,35 @@ CREATE TABLE `specialty` (
 
 CREATE TABLE `user` (
   `userId` bigint(20) NOT NULL,
-  `userName` varchar(255) NOT NULL,
+  `userName` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `phoneNumber` varchar(15) DEFAULT NULL,
-  `email` varchar(255) NOT NULL,
+  `phoneNumber` varchar(20) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
-  `role` varchar(50) DEFAULT NULL,
-  `accountStatus` varchar(50) DEFAULT NULL
+  `role` varchar(255) NOT NULL,
+  `accountStatus` varchar(50) NOT NULL,
+  `user_id` bigint(20) NOT NULL,
+  `account_status` varchar(255) DEFAULT NULL,
+  `phone_number` varchar(255) DEFAULT NULL,
+  `user_name` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_seq`
+--
+
+CREATE TABLE `user_seq` (
+  `next_val` bigint(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user_seq`
+--
+
+INSERT INTO `user_seq` (`next_val`) VALUES
+(1);
 
 -- --------------------------------------------------------
 
@@ -120,8 +196,7 @@ ALTER TABLE `specialty`
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`userId`),
-  ADD UNIQUE KEY `email` (`email`);
+  ADD PRIMARY KEY (`userId`);
 
 --
 -- Indexes for table `user_specialty`

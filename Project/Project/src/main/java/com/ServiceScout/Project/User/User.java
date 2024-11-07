@@ -1,6 +1,7 @@
 package com.ServiceScout.Project.User;
 
 import com.ServiceScout.Project.Specialty.Specialty;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -15,6 +16,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long userId;
 
+    @Column(nullable = true)
     private String userName;
 
     private String password;
@@ -36,7 +38,9 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "specialty_id")
     )
+    @JsonManagedReference
     private List<Specialty> specialties;
+
 
     public List<Specialty> getSpecialties() {
         return specialties;

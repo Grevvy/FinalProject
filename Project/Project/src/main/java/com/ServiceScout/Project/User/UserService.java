@@ -1,5 +1,7 @@
 package com.ServiceScout.Project.User;
 
+import com.ServiceScout.Project.Specialty.Specialty;
+import com.ServiceScout.Project.Specialty.SpecialtyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,19 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private SpecialtyRepository specialtyRepository;
+
+    public User assignSpecialtiesToUser(long userId, List<Long> specialtyIds) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        List<Specialty> specialties = specialtyRepository.findAllById(specialtyIds);
+
+        user.setSpecialties(specialties);
+        return userRepository.save(user);
+    }
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
