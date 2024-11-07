@@ -1,6 +1,7 @@
 package com.ServiceScout.Project.User;
 
 import com.ServiceScout.Project.Specialty.Specialty;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.List;
@@ -38,7 +39,7 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "specialty_id")
     )
-    @JsonManagedReference
+    @JsonIgnore
     private List<Specialty> specialties;
 
 

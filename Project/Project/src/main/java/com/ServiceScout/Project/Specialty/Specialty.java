@@ -2,6 +2,7 @@ package com.ServiceScout.Project.Specialty;
 
 import com.ServiceScout.Project.User.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public class Specialty {
     private String name;
 
     @ManyToMany(mappedBy = "specialties")
-    @JsonBackReference
+    @JsonIgnore
     private List<User> users;
 
     // Constructors, Getters, and Setters
