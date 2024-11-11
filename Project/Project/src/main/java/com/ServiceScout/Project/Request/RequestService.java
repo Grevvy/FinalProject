@@ -20,8 +20,8 @@ public class RequestService {
         return requestRepository.findById(id);
     }
 
-    public List<Request> getRequestsByUserId(Long userId) {
-        return requestRepository.findByUserUserId(userId);
+    public List<Request> getRequestsByCustomerId(Long customerId) {
+        return requestRepository.findByCustomerUserId(customerId);
     }
 
     public List<Request> getRequestsByContractorId(Long contractorId) {
@@ -35,7 +35,7 @@ public class RequestService {
     public Request updateRequest(Long id, Request updatedRequest) {
         return requestRepository.findById(id)
                 .map(existingRequest -> {
-                    existingRequest.setUser(updatedRequest.getUser());
+                    existingRequest.setCustomer(updatedRequest.getCustomer());
                     existingRequest.setContractor(updatedRequest.getContractor());
                     existingRequest.setDescription(updatedRequest.getDescription());
                     existingRequest.setStatus(updatedRequest.getStatus());

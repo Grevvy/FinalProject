@@ -9,7 +9,7 @@ import java.util.List;
 public interface RequestRepository extends JpaRepository<Request, Long> {
 
     // Find requests by the user who created them
-    List<Request> findByUserUserId(Long userId);
+    List<Request> findByCustomerUserId(Long customerId);
 
     // Find requests assigned to a specific contractor
     List<Request> findByContractorUserId(Long contractorId);

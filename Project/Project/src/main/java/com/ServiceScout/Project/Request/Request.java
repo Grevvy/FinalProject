@@ -14,12 +14,12 @@ public class Request {
 
     // User who created the request
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @JoinColumn(name = "customer_id", nullable = false)
+    private User customer;
 
     // Contractor assigned to fulfill the request
     @ManyToOne
-    @JoinColumn(name = "contractor_id", nullable = true)
+    @JoinColumn(name = "contractor_id", nullable = false)
     private User contractor;
 
     @Column(nullable = false)
@@ -43,8 +43,8 @@ public class Request {
     public Request() {
     }
 
-    public Request(User user, User contractor, String description, Status status) {
-        this.user = user;
+    public Request(User customer, User contractor, String description, Status status) {
+        this.customer = customer;
         this.contractor = contractor;
         this.description = description;
         this.status = status;
@@ -56,12 +56,12 @@ public class Request {
         return requestId;
     }
 
-    public User getUser() {
-        return user;
+    public User getCustomer() {
+        return customer;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setCustomer(User customer) {
+        this.customer = customer;
     }
 
     public User getContractor() {

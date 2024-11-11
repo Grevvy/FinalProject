@@ -28,9 +28,9 @@ public class RequestController {
     }
 
     // Get requests by user ID
-    @GetMapping("/user/{userId}")
-    public List<Request> getRequestsByUserId(@PathVariable Long userId) {
-        return requestService.getRequestsByUserId(userId);
+    @GetMapping("/customer/{userId}")
+    public List<Request> getRequestsByUserId(@PathVariable Long customerId) {
+        return requestService.getRequestsByCustomerId(customerId);
     }
 
     // Get requests by contractor ID
