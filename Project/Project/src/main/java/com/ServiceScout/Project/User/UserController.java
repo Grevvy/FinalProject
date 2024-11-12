@@ -13,6 +13,11 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @GetMapping("/flagged")
+    public List<User> getFlaggedAccounts() {
+        return userService.getFlaggedAccounts();
+    }
+
     @PutMapping("/{userId}/specialties")
     public User assignSpecialtiesToUser(@PathVariable long userId, @RequestBody List<Long> specialtyIds) {
         return userService.assignSpecialtiesToUser(userId, specialtyIds);

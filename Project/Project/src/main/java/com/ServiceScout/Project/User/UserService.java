@@ -17,6 +17,10 @@ public class UserService {
     @Autowired
     private SpecialtyRepository specialtyRepository;
 
+    public List<User> getFlaggedAccounts() {
+        return userRepository.findByAccountStatus(User.AccountStatus.FLAGGED);
+    }
+
     public User assignSpecialtiesToUser(long userId, List<Long> specialtyIds) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));

@@ -31,7 +31,15 @@ public class User {
 
     private String address;
 
-    private String accountStatus;
+    @Enumerated(EnumType.STRING)
+    private AccountStatus accountStatus = AccountStatus.ACTIVE;
+
+    public enum AccountStatus {
+        ACTIVE,
+        INACTIVE,
+        SUSPENDED,
+        FLAGGED
+    }
 
     @ManyToMany
     @JoinTable(
@@ -107,25 +115,26 @@ public class User {
         this.role = role;
     }
 
-    public String getAccountStatus() {
+    public AccountStatus getAccountStatus() {
         return accountStatus;
     }
 
-    public void setAccountStatus(String accountStatus) {
+    public void setAccountStatus(AccountStatus accountStatus) {
         this.accountStatus = accountStatus;
     }
 
     public User() {
     }
 
-    public User(long userId, String userName, String password, String phoneNumber, String email, String address, String role, String accountStatus) {
+    public User(long userId, String userName, String password, String phoneNumber, String email, String role, String address, AccountStatus accountStatus, List<Specialty> specialties) {
         this.userId = userId;
         this.userName = userName;
         this.password = password;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        this.address = address;
         this.role = role;
+        this.address = address;
         this.accountStatus = accountStatus;
+        this.specialties = specialties;
     }
 }

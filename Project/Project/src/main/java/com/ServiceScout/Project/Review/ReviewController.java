@@ -19,6 +19,11 @@ public class ReviewController {
         return reviewService.getAllReviews();
     }
 
+    @GetMapping("/flagged")
+    public List<Review> getFlaggedReviews() {
+        return reviewService.getFlaggedReviews();
+    }
+
     // Get review by ID
     @GetMapping("/{id}")
     public ResponseEntity<Review> getReviewById(@PathVariable Long id) {

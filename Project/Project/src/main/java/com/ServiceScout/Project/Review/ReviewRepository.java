@@ -12,4 +12,7 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
 
     // Find all reviews for a specific contractor
     List<Review> findByContractorUserId(Long contractorId);
+
+    List<Review> findByReviewStatus(Review.ReviewStatus reviewStatus);
+
 }

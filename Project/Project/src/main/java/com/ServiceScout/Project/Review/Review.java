@@ -37,6 +37,14 @@ public class Review {
     @Column(name = "created_at", updatable = false)
     private Date createdAt;
 
+    @Enumerated(EnumType.STRING)
+    private ReviewStatus reviewStatus = ReviewStatus.UNFLAGGED;
+
+    public enum ReviewStatus {
+        UNFLAGGED,
+        FLAGGED
+    }
+
     // Getters and Setters
 
     public Date getCreatedAt() {
@@ -92,11 +100,21 @@ public class Review {
     public Review() {
     }
 
-    public Review(User reviewer, User contractor, String textBody, int rating, Date createdAt) {
+    public ReviewStatus getReviewStatus() {
+        return reviewStatus;
+    }
+
+    public void setReviewStatus(ReviewStatus reviewStatus) {
+        this.reviewStatus = reviewStatus;
+    }
+
+    public Review(long reviewId, User reviewer, User contractor, String textBody, int rating, Date createdAt, ReviewStatus reviewStatus) {
+        this.reviewId = reviewId;
         this.reviewer = reviewer;
         this.contractor = contractor;
         this.textBody = textBody;
         this.rating = rating;
         this.createdAt = createdAt;
+        this.reviewStatus = reviewStatus;
     }
 }

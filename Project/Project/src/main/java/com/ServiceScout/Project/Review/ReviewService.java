@@ -16,6 +16,10 @@ public class ReviewService {
         return reviewRepository.findAll();
     }
 
+    public List<Review> getFlaggedReviews() {
+        return reviewRepository.findByReviewStatus(Review.ReviewStatus.FLAGGED);
+    }
+
     public Optional<Review> getReviewById(Long id) {
         return reviewRepository.findById(id);
     }
@@ -39,6 +43,7 @@ public class ReviewService {
                     existingReview.setContractor(updatedReview.getContractor());
                     existingReview.setTextBody(updatedReview.getTextBody());
                     existingReview.setRating(updatedReview.getRating());
+                    existingReview.setReviewStatus(updatedReview.getReviewStatus());
                     return reviewRepository.save(existingReview);
                 })
                 .orElseThrow(() -> new RuntimeException("Review not found with id " + id));
