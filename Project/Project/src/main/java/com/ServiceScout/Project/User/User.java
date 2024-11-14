@@ -27,7 +27,14 @@ public class User {
     private String email;
 
     @Column(nullable = false)
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private Role role = Role.USER;
+
+    public enum Role {
+        USER,
+        CONTRACTOR,
+        ADMIN
+    }
 
     private String address;
 
@@ -107,11 +114,11 @@ public class User {
         this.address = address;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
@@ -126,7 +133,7 @@ public class User {
     public User() {
     }
 
-    public User(long userId, String userName, String password, String phoneNumber, String email, String role, String address, AccountStatus accountStatus, List<Specialty> specialties) {
+    public User(long userId, String userName, String password, String phoneNumber, String email, Role role, String address, AccountStatus accountStatus, List<Specialty> specialties) {
         this.userId = userId;
         this.userName = userName;
         this.password = password;
