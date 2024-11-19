@@ -16,8 +16,10 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long userId;
+    @Column(nullable = false)
+    private String name;
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     private String userName;
 
     private String password;
@@ -130,11 +132,20 @@ public class User {
         this.accountStatus = accountStatus;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public User() {
     }
 
-    public User(long userId, String userName, String password, String phoneNumber, String email, Role role, String address, AccountStatus accountStatus, List<Specialty> specialties) {
+    public User(long userId, String name, String userName, String password, String phoneNumber, String email, Role role, String address, AccountStatus accountStatus, List<Specialty> specialties) {
         this.userId = userId;
+        this.name = name;
         this.userName = userName;
         this.password = password;
         this.phoneNumber = phoneNumber;

@@ -17,6 +17,10 @@ public class UserService {
     @Autowired
     private SpecialtyRepository specialtyRepository;
 
+    public User findByUserNameAndPassword(String userName, String password) {
+        return userRepository.findByUserNameAndPassword(userName, password);
+    }
+
     public List<User> getFlaggedAccounts() {
         return userRepository.findByAccountStatus(User.AccountStatus.FLAGGED);
     }
@@ -47,6 +51,7 @@ public class UserService {
     public User updateUser(Long id, User updatedUser) {
         return userRepository.findById(id)
                 .map(existingUser -> {
+                    existingUser.setName(updatedUser.getName());
                     existingUser.setUserName(updatedUser.getUserName());
                     existingUser.setPassword(updatedUser.getPassword());
                     existingUser.setPhoneNumber(updatedUser.getPhoneNumber());

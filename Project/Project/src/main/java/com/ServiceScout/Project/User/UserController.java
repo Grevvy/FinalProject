@@ -1,17 +1,29 @@
 package com.ServiceScout.Project.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/users")
 public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @PostMapping("/login")
+    public ResponseEntity<User> login(@RequestBody User credentials) {
+        User user = userService.findByUserNameAndPassword(credentials.getUserName(), credentials.getPassword());
+        if (user != null) {
+            return ResponseEntity.ok(user);
+        } else {
+            return ResponseEntity.status(401).build(); // Unauthorized if credentials don't match
+        }
+    }
 
     @GetMapping("/flagged")
     public List<User> getFlaggedAccounts() {
