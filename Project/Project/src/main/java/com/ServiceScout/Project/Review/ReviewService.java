@@ -49,6 +49,21 @@ public class ReviewService {
                 .orElseThrow(() -> new RuntimeException("Review not found with id " + id));
     }
 
+    public Review flagReview(Long reviewId) {
+        Optional<Review> reviewOptional = reviewRepository.findById(reviewId);
+        if (reviewOptional.isPresent()) {
+            Review review = reviewOptional.get();
+            if (review.getReviewStatus() == Review.ReviewStatus.FLAGGED) {
+                review.setReviewStatus(Review.ReviewStatus.UNFLAGGED);
+            } else {
+                review.setReviewStatus(Review.ReviewStatus.FLAGGED);
+            }
+            return reviewRepository.save(review);
+        } else {
+            throw new RuntimeException("Review not found with ID: " + reviewId);
+        }
+    }
+
     public void deleteReview(Long id) {
         reviewRepository.deleteById(id);
     }

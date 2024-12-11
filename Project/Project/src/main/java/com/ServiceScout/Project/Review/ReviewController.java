@@ -61,6 +61,17 @@ public class ReviewController {
         }
     }
 
+    // Update the status of a review
+    @PutMapping("/{id}/flag")
+    public ResponseEntity<Review> flagReview(@PathVariable Long id) {
+        try {
+            Review flaggedReview = reviewService.flagReview(id);
+            return ResponseEntity.ok(flaggedReview);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     // Delete a review
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteReview(@PathVariable Long id) {

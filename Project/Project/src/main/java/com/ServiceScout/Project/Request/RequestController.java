@@ -55,6 +55,15 @@ public class RequestController {
             return ResponseEntity.notFound().build();
         }
     }
+    @PutMapping("/{id}/status")
+    public ResponseEntity<Request> updateRequestStatus(@PathVariable Long id, @RequestParam String status) {
+        try {
+            Request updatedRequest = requestService.updateStatus(id, status);
+            return ResponseEntity.ok(updatedRequest);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
     // Delete a request
     @DeleteMapping("/{id}")

@@ -44,6 +44,23 @@ public class RequestService {
                 .orElseThrow(() -> new RuntimeException("Request not found with id " + id));
     }
 
+    public Request updateStatus(Long requestId, String status) {
+        Optional<Request> optionalRequest = requestRepository.findById(requestId);
+        if (optionalRequest.isPresent()) {
+            Request request = optionalRequest.get();
+            try {
+                Request.Status requestStatus = Request.Status.valueOf(status.toUpperCase());
+                request.setStatus(requestStatus);
+                return requestRepository.save(request);
+            } catch (IllegalArgumentException e) {
+                throw new RuntimeException("Invalid status value: " + status);
+            }
+        } else {
+            throw new RuntimeException("Request not found with ID: " + requestId);
+        }
+    }
+
+
     public void deleteRequest(Long id) {
         requestRepository.deleteById(id);
     }
