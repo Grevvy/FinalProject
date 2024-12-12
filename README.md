@@ -12,3 +12,5 @@ CSC340 Final Project
 > Contractors(provider) will be able to create a profile that showcases their qualifications and experience. They will also be able to respond to reviews and comments that are left by users. They also will be able to display and change their prices that are displayed for different services.
 >
 > SysAdmins will be able to review contractor and user profiles. They will also be able to review comments and reviews left by users as well as flag and delete inappropriate profiles and comments.
+>
+## Don't forget to have the frontend implementation running at the same time.
